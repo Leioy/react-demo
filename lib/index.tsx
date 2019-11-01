@@ -1,2 +1,5 @@
-console.log('hi3')
-const x =1
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+console.log(React);
+console.log(ReactDOM);
