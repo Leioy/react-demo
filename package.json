@@ -4,5 +4,11 @@
   "main": "index.js",
   "repository": "git@github.com:Leioy/react-demo.git",
   "author": "Leioy <13902303081@139.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "awesome-typescript-loader": "^5.2.1",
+    "typescript": "^3.6.4",
+    "webpack": "4.29.6",
+    "webpack-cli": "3.2.3"
+  }
 }
