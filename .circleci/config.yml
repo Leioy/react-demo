@@ -68,8 +68,4 @@ workflows:
       - publish:
           requires:
             - build
-          filters:
-            tags:
-              only: /^v[0-9]+(\.[0-9]+)*/
-            branches:
-              ignore: /.*/
+          
