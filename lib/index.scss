@@ -1,0 +1,11 @@
+// ! 这个选择器选中不了伪元素选择器
+[class^=rui-] {
+  box-sizing: border-box;
+}
+[class^=rui-] {
+  &::before,&::after {
+    box-sizing: border-box;
+    font-size: 14px;
+  }
+}
+

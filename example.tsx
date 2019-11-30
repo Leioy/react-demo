@@ -2,6 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { HashRouter as Router, Link, Route } from 'react-router-dom'
 import IconExample from './lib/icon/icon.example'
+import DialogExample from './lib/dialog/dialog.example'
+import './lib/index.scss'
 ReactDOM.render(
   <Router>
     <div>
@@ -16,12 +18,13 @@ ReactDOM.render(
               <Link to="/icon">icon</Link>
             </li>
             <li>
-              <Link to="/button">button</Link>
+              <Link to="/dialog">dialog</Link>
             </li>
           </ul>
         </aside>
         <main>
           <Route path="/icon" component={IconExample}></Route>
+          <Route path="/dialog" component={DialogExample}></Route>
         </main>
       </div>
     </div>
