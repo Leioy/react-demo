@@ -1,10 +1,24 @@
 import React, { useState } from 'react'
-import Dialog from './dialog'
+import Dialog, { alert, confirm, modal } from './dialog'
 export default function () {
   const [x, setX] = useState(false)
   const [y, setY] = useState(false)
+  const onClickModal = () => {
+    const close = modal(
+      <div>
+        <h1>你好</h1>
+        <button onClick={() => { close() }}>close</button>
+      </div>
+    )
+  }
   return (
     <div>
+      <div>
+        example3
+        <button onClick={() => { alert('1') }}>click</button>
+        <button onClick={() => { confirm('1', () => { console.log('yes') }, () => { console.log('no') }) }}>click</button>
+        <button onClick={onClickModal}>click</button>
+      </div>
       <div>
         example1
         <button onClick={() => { setX(!x) }}>click</button>
