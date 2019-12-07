@@ -1,9 +1,13 @@
 import React from 'react';
+import { prefixFunctionMaker } from '../prefixMaker'
+const prefixAdder = prefixFunctionMaker('rui-layout')
 
-const Aside: React.FC = () => {
+interface IProps extends React.HTMLAttributes<HTMLElement> { }
+const Aside: React.FC<IProps> = (props) => {
+  const { className, ...rest } = props
   return (
-    <div>
-
+    <div className={prefixAdder('aside', { extra: className })} {...rest}>
+      aside
     </div>
   );
 };
