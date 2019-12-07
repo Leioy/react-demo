@@ -6,7 +6,7 @@ const Footer: React.FC<IProps> = (props) => {
   const { className, ...rest } = props
   return (
     <div className={prefixAdder('footer', { extra: className })} {...rest}>
-      footer
+      {props.children}
     </div>
   );
 };

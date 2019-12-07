@@ -1,11 +1,9 @@
 @import '../variable';
 .rui-layout {
-  border: 1px solid red;
   display: flex;
   flex-direction: column;
   &-content {
     flex-grow: 1;
-    background: green;
   }
   & & {
     flex-grow: 1;

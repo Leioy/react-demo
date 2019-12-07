@@ -7,7 +7,7 @@ const Content: React.FC<IProps> = (props) => {
   const { className, ...rest } = props
   return (
     <div className={prefixAdder('content', { extra: className })} {...rest}>
-      content
+      {props.children}
     </div>
   );
 };

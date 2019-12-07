@@ -7,7 +7,7 @@ const Header: React.FC<IProps> = (props) => {
   const { className, ...rest } = props
   return (
     <div className={prefixAdder('header', { extra: className })} {...rest}>
-      header
+      {props.children}
     </div>
   );
 };

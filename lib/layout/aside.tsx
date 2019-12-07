@@ -7,7 +7,7 @@ const Aside: React.FC<IProps> = (props) => {
   const { className, ...rest } = props
   return (
     <div className={prefixAdder('aside', { extra: className })} {...rest}>
-      aside
+      {props.children}
     </div>
   );
 };
