@@ -22,7 +22,7 @@ const Dialog: React.FunctionComponent<IProps> = (props) => {
   const component = props.visible ?
     <Fragment>
       <div className={prefixAdder('mask')} onClick={onClickMask}></div>
-      <div className={prefixAdder()}>
+      <div className={prefixAdder('')}>
         <div className={prefixAdder('close')} onClick={onClickClose}>
           <Icon name="close" />
         </div>
