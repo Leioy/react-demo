@@ -2,7 +2,7 @@ import React, { Fragment, ReactNode, ReactElement } from 'react'
 import './dialog.scss'
 import Icon from '../icon/icon'
 import ReactDOM from 'react-dom'
-import { prefixFunctionMaker } from '../prefixMaker'
+import { prefixFunctionMaker } from '../helpers/classes'
 interface IProps {
   visible: boolean
   buttons?: Array<ReactElement>

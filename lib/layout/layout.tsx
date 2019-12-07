@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import './layout.scss'
-import { prefixFunctionMaker } from '../prefixMaker'
+import { prefixFunctionMaker } from '../helpers/classes'
 import Aside from './aside';
 const prefixAdder = prefixFunctionMaker('rui-layout')
 
@@ -10,9 +10,9 @@ interface IProps extends React.HtmlHTMLAttributes<HTMLElement> {
 const Layout: React.FC<IProps> = (props) => {
   const { className, ...rest } = props
   const children = props.children as Array<ReactElement>
-  const hasAside = children.length && children.reduce((prev, cur) => prev || cur.type === Aside, false)
+  const hasAside = 'length' in children && children.reduce((prev, cur) => prev || cur.type === Aside, false)
   return (
-    <div className={prefixAdder('', { extra: [className, hasAside && 'hasAside'].join(' ') })}{...rest}>
+    <div className={prefixAdder({ '': true, hasAside }, { extra: className })}{...rest}>
       {props.children}
     </div>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { prefixFunctionMaker } from '../prefixMaker'
+import { prefixFunctionMaker } from '../helpers/classes'
 const prefixAdder = prefixFunctionMaker('rui-layout')
 
 interface IProps extends React.HTMLAttributes<HTMLElement> { }
