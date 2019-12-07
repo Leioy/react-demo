@@ -2,16 +2,12 @@ import React, { Fragment, ReactNode, ReactElement } from 'react'
 import './dialog.scss'
 import Icon from '../icon/icon'
 import ReactDOM from 'react-dom'
+import { prefixFunctionMaker } from '../prefixMaker'
 interface IProps {
   visible: boolean
   buttons?: Array<ReactElement>
   onClose: React.MouseEventHandler
   closeOnClickMask?: boolean
-}
-function prefixFunctionMaker (prefix = '') {
-  return function (name?: string) {
-    return [prefix, name].filter(Boolean).join('-')
-  }
 }
 const prefixAdder = prefixFunctionMaker('rui-dialog')
 const Dialog: React.FunctionComponent<IProps> = (props) => {
