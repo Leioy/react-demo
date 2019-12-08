@@ -1,6 +1,7 @@
 /test-results
 /.vscode
 /dist/*
+/doc/
 # Logs
 logs
 *.log
