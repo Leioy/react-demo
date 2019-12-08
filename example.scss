@@ -29,11 +29,20 @@ $main-color: #00ADB5;
       font-size: 18px;
     }
     ul {
-      padding: 0 16px;
       min-width: 10em;
       > li {
-        padding: 8px 0;
-        color: $main-color;
+        > a {
+          display: block;
+          padding: 8px 16px;
+          color: #333;
+          &:hover {
+            color: $main-color;
+          }
+          &.active {
+            background: $main-color;
+            color: #fff;
+          }
+        }
       }
     }  
   }
