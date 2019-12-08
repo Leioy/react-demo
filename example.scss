@@ -4,9 +4,13 @@ h1,h2,h3,h4,h5,h6{font-weight: normal;}
 ul,ol{list-style: none;}
 a {text-decoration: none;color: inherit;}
 $main-color: #00ADB5;
+pre {
+  font-family: 'Fira Code',Menlo,Monaco,monospace;
+}
 .site {
   &-page {
     background: #fff;
+    min-height: 100vh;
   }
   &-header {
     background: #EEE;
