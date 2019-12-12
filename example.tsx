@@ -4,9 +4,10 @@ import { HashRouter as Router, Route, NavLink } from 'react-router-dom'
 import IconDemo from './lib/icon/icon.demo'
 import DialogExample from './lib/dialog/dialog.example'
 import LayoutExample from './lib/layout/layout.example'
-// import './lib/index.scss' 
+// import './lib/index.scss'
 import { Layout, Header, Content, Aside, Footer } from './lib/layout/layout'
 import './example.scss'
+import FormExample from './lib/form/form.example';
 const logo = require('./logo.png').default
 // import logo from './logo.png'
 ReactDOM.render(
@@ -32,12 +33,16 @@ ReactDOM.render(
               <li>
                 <NavLink to="/layout">layout</NavLink>
               </li>
+              <li>
+                <NavLink to="/form">form</NavLink>
+              </li>
             </ul>
           </Aside>
           <Content className="site-main">
-            <Route path="/icon" component={IconDemo}></Route>
-            <Route path="/dialog" component={DialogExample}></Route>
-            <Route path="/layout" component={LayoutExample}></Route>
+            <Route path="/icon" component={IconDemo}/>
+            <Route path="/dialog" component={DialogExample}/>
+            <Route path="/layout" component={LayoutExample}/>
+            <Route path="/form" component={FormExample}/>
           </Content>
         </Layout>
         <Footer className="site-footer">&copy; Leioy</Footer>
