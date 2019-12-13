@@ -16,7 +16,6 @@ interface FormErrors {
 
 function isEmpty (value: any) {
 	return value === undefined || value === null || value === ''
-	
 }
 
 const Validator = (formValue: FormValue, rules: FormRules): FormErrors => {

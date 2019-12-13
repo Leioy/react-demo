@@ -1,4 +1,6 @@
-import React, {ChangeEvent, ReactFragment} from 'react'
+import React, { ChangeEvent, ReactFragment } from 'react'
+import Input from './input/input';
+import './form.scss'
 
 export interface FormValue {
 	[K: string]: any
@@ -11,6 +13,7 @@ interface Props {
 	onSubmit: React.FormEventHandler<HTMLFormElement>
 	onChange: (value: FormValue) => void
 	errors: { [K: string]: string[] }
+	errorsMode?: 'first' | 'all'
 }
 
 const Form: React.FC<Props> = (props) => {
@@ -20,24 +23,42 @@ const Form: React.FC<Props> = (props) => {
 		props.onSubmit(e)
 	}
 	const onInputChange = (name: string, e: ChangeEvent<HTMLInputElement>) => {
-		const newFormData = {...formData, [name]: e.target.value}
+		const newFormData = { ...formData, [name]: e.target.value }
 		props.onChange(newFormData)
 	}
 	return (
 		<form onSubmit={onSubmit}>
-			{props.fields.map(f =>
-				<div key={f.name}>
-					{f.label}
-					<input type={f.input.type} value={formData[f.name]}
-						//      onChange={(e) => onInputChange(f.name, e.target.value)}
-						     onChange={onInputChange.bind(null, f.name)}
-					/>
-					<div>{props.errors[f.name]}</div>
-				</div>
-			)}
-			{props.buttons}
+			<table className="rui-form-table">
+				{props.fields.map(f =>
+					<tr className="rui-form-tr" key={f.name}>
+						<td className="rui-form-td">
+							<span className="rui-form-label">{f.label}</span>
+						</td>
+						<td className="rui-form-td">
+							<Input type={f.input.type} value={formData[f.name]}
+								//      onChange={(e) => onInputChange(f.name, e.target.value)}
+								     onChange={onInputChange.bind(null, f.name)}
+							/>
+							<div className="rui-form-error">{
+								props.errors[f.name] ?
+									(props.errorsMode === 'first' ? props.errors[f.name][0] : props.errors[f.name].join('，')) :
+									<span>&nbsp;</span>
+							}</div>
+						</td>
+					</tr>
+				)}
+				<tr className="rui-form-tr">
+					<td className="rui-form-td"/>
+					<td className="rui-form-td">
+						{props.buttons}
+					</td>
+				</tr>
+			</table>
 		</form>
 	)
+}
+Form.defaultProps = {
+	errorsMode: 'first'
 }
 
 export default Form

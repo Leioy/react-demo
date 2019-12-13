@@ -1,0 +1,23 @@
+.rui-form {
+	&-label{
+		line-height: 32px;
+	}
+	&-table {
+		border-collapse: collapse;
+	}
+	&-error {
+		margin-top: 4px;
+		color: red;
+		font-size: .8em;
+	}
+	&-tr:last-child &-td {
+		padding-bottom: 0;
+	}
+	&-td {
+		vertical-align: top;
+		padding-bottom: 8px;
+	}
+	&-td + &-td {
+		padding-left: 16px;
+	}
+}
