@@ -14,6 +14,7 @@ interface Props {
 	onChange: (value: FormValue) => void
 	errors: { [K: string]: string[] }
 	errorsMode?: 'first' | 'all'
+	transformError?: (message: string) => string
 }
 
 const Form: React.FC<Props> = (props) => {
@@ -26,34 +27,44 @@ const Form: React.FC<Props> = (props) => {
 		const newFormData = { ...formData, [name]: e.target.value }
 		props.onChange(newFormData)
 	}
+	const transformError = (message: string) => {
+		const map: any = {
+			required: '必填',
+			minLength: '太短',
+			maxLength: '太长'
+		}
+		return props.transformError && props.transformError(message) || map[message] || '未知错误'
+	}
 	return (
 		<form onSubmit={onSubmit}>
 			<table className="rui-form-table">
 				<tbody>
-					{props.fields.map(f =>
-						<tr className="rui-form-tr" key={f.name}>
-							<td className="rui-form-td">
-								<span className="rui-form-label">{f.label}</span>
-							</td>
-							<td className="rui-form-td">
-								<Input type={f.input.type} value={formData[f.name]}
-									//      onChange={(e) => onInputChange(f.name, e.target.value)}
-									     onChange={onInputChange.bind(null, f.name)}
-								/>
-								<div className="rui-form-error">{
-									props.errors[f.name] ?
-										(props.errorsMode === 'first' ? props.errors[f.name][0] : props.errors[f.name].join('，')) :
-										<span>&nbsp;</span>
-								}</div>
-							</td>
-						</tr>
-					)}
-					<tr className="rui-form-tr">
-						<td className="rui-form-td"/>
+				{props.fields.map(f =>
+					<tr className="rui-form-tr" key={f.name}>
 						<td className="rui-form-td">
-							{props.buttons}
+							<span className="rui-form-label">{f.label}</span>
+						</td>
+						<td className="rui-form-td">
+							<Input type={f.input.type} value={formData[f.name]}
+								//      onChange={(e) => onInputChange(f.name, e.target.value)}
+								     onChange={onInputChange.bind(null, f.name)}
+							/>
+							<div className="rui-form-error">{
+								props.errors[f.name] ?
+									(props.errorsMode === 'first' ?
+										transformError(props.errors[f.name][0]) :
+										props.errors[f.name].map(transformError).join('，')) :
+									<span>&nbsp;</span>
+							}</div>
 						</td>
 					</tr>
+				)}
+				<tr className="rui-form-tr">
+					<td className="rui-form-td"/>
+					<td className="rui-form-td">
+						{props.buttons}
+					</td>
+				</tr>
 				</tbody>
 			</table>
 		</form>

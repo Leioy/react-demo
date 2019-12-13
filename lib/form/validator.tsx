@@ -6,7 +6,7 @@ interface FormRule {
 	minLength?: number
 	maxLength?: number
 	pattern?: RegExp
-	validator?: { validate: (value: string) => Promise<void> }
+	validator?: { name: string, validate: (value: string) => Promise<void> }
 }
 
 interface OneError {
@@ -32,38 +32,46 @@ const Validator = (formValue: FormValue, rules: FormRules, callback: (errors: an
 		const value = formValue[rule.key]
 		if (rule.validator) {
 			const promise = rule.validator.validate(value)
-			addErrors(rule.key, { message: '用户名已存在', promise })
+			addErrors(rule.key, { message: rule.validator.name, promise })
 		}
 		if (rule.required && isEmpty(value)) {
-			addErrors(rule.key, { message: '必填' })
+			addErrors(rule.key, { message: 'required' })
 		}
 		if (rule.minLength && (!isEmpty(value) && value!.length < rule.minLength)) {
-			addErrors(rule.key, { message: '太短' })
+			addErrors(rule.key, { message: 'minLength' })
 		}
 		if (rule.maxLength && (!isEmpty(value) && value!.length > rule.maxLength)) {
-			addErrors(rule.key, { message: '太长' })
+			addErrors(rule.key, { message: 'maxLength' })
 		}
 		if (rule.pattern && !(rule.pattern.test(value))) {
-			addErrors(rule.key, { message: '格式不正确' })
+			addErrors(rule.key, { message: 'pattern' })
 		}
 	})
-	const promiseList = flat(Object.values(errors))
-		.filter(item => item.promise)
-		.map(item => item.promise)
-	Promise.all(promiseList)
-		.then(() => {
-			const newErrors = fromEntries(
+	const x = () => {
+		callback(
+			fromEntries(
 				Object.keys(errors)
 					.map(key => [key, errors[key].map((item: OneError) => item.message)])
 			)
-			callback(newErrors)
-		}, () => {
-			const newErrors = fromEntries(
-				Object.keys(errors)
-					.map(key => [key, errors[key].map((item: OneError) => item.message)])
-			)
-			callback(newErrors)
-		})
+		)
+	}
+	Promise.all(
+		flat(Object.values(errors))
+			.filter(item => item.promise)
+			.map(item => item.promise)
+	).then(x, x).catch(err => console.log(err))
+
+//	这种写法捕获不了错误
+// finally
+// 	(() => {
+// 		callback(
+// 			fromEntries(
+// 				Object.keys(errors)
+// 					.map(key => [key, errors[key].map((item: OneError) => item.message)])
+// 			)
+// 		)
+// 	})
+// }
 }
 export default Validator
 
