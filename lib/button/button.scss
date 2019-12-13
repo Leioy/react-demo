@@ -1,0 +1,33 @@
+@import "../variable";
+.rui-button {
+	padding: 4px 16px;
+	line-height: 22px;
+	transition: all .25s;
+	cursor: pointer;
+	&:focus {
+		outline: none;
+	}
+	&-normal {
+		color: #333;
+		border: 1px solid lighten(#333, 50%);
+		background: #fff;
+		border-radius: 4px;
+		&:hover, &:focus {
+			border-color: $main-color;
+			color: $main-color;
+		}
+		&:focus {
+			outline: none;
+		}
+	}
+	&-important {
+		color: #fff;
+		border: 1px solid lighten(#333, 50%);
+		background: $main-color;
+		border-radius: 4px;
+		&:hover, &:focus {
+			background-color: lighten($main-color, 10%);
+			border-color: lighten($main-color, 10%);
+		}
+	}
+}
