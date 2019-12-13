@@ -29,30 +29,32 @@ const Form: React.FC<Props> = (props) => {
 	return (
 		<form onSubmit={onSubmit}>
 			<table className="rui-form-table">
-				{props.fields.map(f =>
-					<tr className="rui-form-tr" key={f.name}>
+				<tbody>
+					{props.fields.map(f =>
+						<tr className="rui-form-tr" key={f.name}>
+							<td className="rui-form-td">
+								<span className="rui-form-label">{f.label}</span>
+							</td>
+							<td className="rui-form-td">
+								<Input type={f.input.type} value={formData[f.name]}
+									//      onChange={(e) => onInputChange(f.name, e.target.value)}
+									     onChange={onInputChange.bind(null, f.name)}
+								/>
+								<div className="rui-form-error">{
+									props.errors[f.name] ?
+										(props.errorsMode === 'first' ? props.errors[f.name][0] : props.errors[f.name].join('，')) :
+										<span>&nbsp;</span>
+								}</div>
+							</td>
+						</tr>
+					)}
+					<tr className="rui-form-tr">
+						<td className="rui-form-td"/>
 						<td className="rui-form-td">
-							<span className="rui-form-label">{f.label}</span>
-						</td>
-						<td className="rui-form-td">
-							<Input type={f.input.type} value={formData[f.name]}
-								//      onChange={(e) => onInputChange(f.name, e.target.value)}
-								     onChange={onInputChange.bind(null, f.name)}
-							/>
-							<div className="rui-form-error">{
-								props.errors[f.name] ?
-									(props.errorsMode === 'first' ? props.errors[f.name][0] : props.errors[f.name].join('，')) :
-									<span>&nbsp;</span>
-							}</div>
+							{props.buttons}
 						</td>
 					</tr>
-				)}
-				<tr className="rui-form-tr">
-					<td className="rui-form-td"/>
-					<td className="rui-form-td">
-						{props.buttons}
-					</td>
-				</tr>
+				</tbody>
 			</table>
 		</form>
 	)
