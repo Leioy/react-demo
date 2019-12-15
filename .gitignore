@@ -3,6 +3,7 @@
 /.idea
 /dist/*
 /doc/
+.history
 # Logs
 logs
 *.log
