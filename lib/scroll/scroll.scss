@@ -1,0 +1,13 @@
+.rui-scroll {
+	position: relative;
+	overflow: hidden;
+	&-inner {
+		overflow: auto;
+		border: 1px solid blue;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: -16px;
+		bottom: 0;
+	}
+}
