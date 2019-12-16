@@ -44,13 +44,18 @@ const Validator = (formValue: FormValue, rules: FormRules, callback: (errors: an
 			addErrors(rule.key, 'pattern')
 		}
 	})
-	const flattenErrors = flat(Object.keys(errors).map(key => errors[key].map(promiseOrString => [key, promiseOrString])))
+	const flattenErrors = flat(Object.keys(errors).map(key => errors[key].map<[string, OneError]>(promiseOrString => [key, promiseOrString])))
 	const newPromises = flattenErrors.map(([key, promiseOrString]) => (
 			promiseOrString instanceof Promise ? promiseOrString : Promise.reject(promiseOrString)
-		).then(() => [key, undefined], (reason) => [key, reason])
+		).then<[string, undefined], [string, string]>(() => [key, undefined], (reason) => [key, reason])
 	)
+	
+	function hasError (item: [string, undefined] | [string, string]): item is [string, string] {
+		return typeof item[1] === 'string'
+	}
+	
 	Promise.all(newPromises).then(results => {
-		callback(zip(results.filter(item => item[1])))
+		callback(zip(results.filter<[string, string]>(hasError)))
 	})
 }
 export default Validator
@@ -65,13 +70,13 @@ function zip (kvList: Array<[string, string]>) {
 	return result
 }
 
-function flat (array: Array<any>) {
-	const result = []
+function flat<T> (array: Array<T | T[]>) {
+	const result: T[] = []
 	for (let i = 0; i < array.length; i++) {
 		if (array[i] instanceof Array) {
-			result.push(...array[i])
+			result.push(...array[i] as T[])
 		} else {
-			result.push(array[i])
+			result.push(array[i] as T)
 		}
 	}
 	return result
