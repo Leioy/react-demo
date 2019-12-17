@@ -15,7 +15,7 @@ const logo = require('./logo.png').default
 ReactDOM.render(
 	<Router>
 		<div>
-			<Layout className="site-page" style={{ border: '1px solid red' }}>
+			<Layout className="site-page">
 				<Header className="site-header">
 					<div className="site-logo">
 						<img src={logo} width="48" height="48" alt=""/>

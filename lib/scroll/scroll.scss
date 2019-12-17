@@ -3,11 +3,26 @@
 	overflow: hidden;
 	&-inner {
 		overflow: auto;
-		border: 1px solid blue;
 		position: absolute;
 		top: 0;
 		left: 0;
 		right: -16px;
 		bottom: 0;
+	}
+	&-track {
+		border: 1px solid blue;
+		width: 10px;
+		position: absolute;
+		right: 0;
+		top: 0;
+		height: 100%;
+	}
+	&-bar {
+		height: 30px;
+		background: #000;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
 	}
 }
